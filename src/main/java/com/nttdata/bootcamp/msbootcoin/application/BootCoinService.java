@@ -15,7 +15,7 @@ public interface BootCoinService {
 
     public Mono<BootCoin> findById(String idBootCoin);
 
-    public Mono<BootCoinDto> findByCellphone(String cellphone);
+    public Mono<BootCoinDto> findByDocumentNumber(String documentNumber);
 
     public Mono<BootCoin> save(BootCoinDto bootCoinDto);
 
@@ -24,7 +24,5 @@ public interface BootCoinService {
     public Mono<Void> delete(String idBootCoin);
 
     public Mono<BootCoin> updateBalanceById(String idBootCoin, Double balance);
-
-    public Flux<BootCoin> findBalanceByDocumentNumber(String documentNumber);
 
 }

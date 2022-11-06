@@ -43,10 +43,10 @@ public class BootCoinController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/cellphone/{cellphone}")
-    public Mono<ResponseEntity<BootCoinDto>> getBootCoinByAccountNumber(@PathVariable("cellphone") String cellphone) {
-        log.info("GetMapping--getBootCoinByAccountNumber-------cellphone: " + cellphone);
-        return service.findByCellphone(cellphone)
+    @GetMapping("/documentNumber/{documentNumber}")
+    public Mono<ResponseEntity<BootCoinDto>> getBootCoinByDocumentNumber(@PathVariable("documentNumber") String documentNumber) {
+        log.info("GetMapping--getBootCoinByAccountNumber-------documentNumber: " + documentNumber);
+        return service.findByDocumentNumber(documentNumber)
                 .map(c -> ResponseEntity
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,17 +90,6 @@ public class BootCoinController {
     public Mono<ResponseEntity<Void>> deleteBootCoin(@PathVariable("idBootCoin") String idBootCoin) {
         return service.delete(idBootCoin)
                 .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
-    }
-
-    @GetMapping("/documentNumber/{documentNumber}")
-    public Mono<ResponseEntity<List<BootCoin>>> getBootCoinBalanceByDocumentNumber(@PathVariable("documentNumber") String documentNumber) {
-        return service.findBalanceByDocumentNumber(documentNumber)
-                .collectList()
-                .map(c -> ResponseEntity
-                        .ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(c))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
 }

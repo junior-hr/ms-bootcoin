@@ -29,10 +29,10 @@ public class BootCoinServiceImpl implements BootCoinService {
     }
 
     @Override
-    public Mono<BootCoinDto> findByCellphone(String cellphone) {
-        return Mono.just(cellphone)
-                .flatMap(bootCoinRepository::findByCellphone)
-                .switchIfEmpty(Mono.error(new ResourceNotFoundException("Monedero bootcoin", "cellphone", cellphone)));
+    public Mono<BootCoinDto> findByDocumentNumber(String documentNumber) {
+        return Mono.just(documentNumber)
+                .flatMap(bootCoinRepository::findByDocumentNumber)
+                .switchIfEmpty(Mono.error(new ResourceNotFoundException("Monedero bootcoin", "documentNumber", documentNumber)));
     }
 
     @Override
@@ -91,12 +91,6 @@ public class BootCoinServiceImpl implements BootCoinService {
                     x.setBalance(balance);
                     return bootCoinRepository.save(x);
                 });
-    }
-
-    @Override
-    public Flux<BootCoin> findBalanceByDocumentNumber(String documentNumber) {
-        return bootCoinRepository.findBalanceByDocumentNumber(documentNumber)
-                .switchIfEmpty(Mono.error(new ResourceNotFoundException("Cliente", "documentNumber", documentNumber)));
     }
 
 }

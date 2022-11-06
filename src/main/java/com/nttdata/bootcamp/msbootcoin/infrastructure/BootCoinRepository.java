@@ -16,16 +16,9 @@ import reactor.core.publisher.Mono;
 public interface BootCoinRepository extends
         ReactiveMongoRepository<BootCoin, String> {
 
-    @Query(value = "{'client.documentNumber' : ?0, accountNumber: ?1 }")
-    Mono<BootCoinDto> findByAccountAndDocumentNumber(
-            String documentNumber, String accountNumber);
-
-    @Query(value = "{'client.documentNumber' : ?0, 'debitCard.isMainAccount' : true }")
-    Flux<BootCoin> findBalanceByDocumentNumber(String documentNumber);
-
     @Query(value = "{'client.cellphone' : ?0 }")
     Flux<BootCoinDto> findAllByCellphone(String cellphone);
 
-    @Query(value = "{'client.cellphone' : ?0 }")
-    Mono<BootCoinDto> findByCellphone(String cellphone);
+    @Query(value = "{'client.documentNumber' : ?0 }")
+    Mono<BootCoinDto> findByDocumentNumber(String cellphone);
 }

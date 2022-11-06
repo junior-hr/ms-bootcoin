@@ -28,7 +28,7 @@ public class BootCoinConsumer {
     @Autowired
     private BootCoinRepository bootCoinRepository;
 
-    @KafkaListener(topics = "${spring.kafka.topic.mobile.name}")
+    @KafkaListener(topics = "${spring.kafka.topic.bootcoin.name}")
     public void listener(@Payload BalanceBootCoinModel balanceModel) {
         log.info("Message received : {} ", balanceModel);
         applyBalance(balanceModel).block();
